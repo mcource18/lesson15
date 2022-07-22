@@ -56,25 +56,38 @@ class Player:
         return self.__card.cross_count == 15
 
 
-print('1. играть с компьютером')
-print('2. играть с человеком')
 
 
 def play():
+    print('1. играть с компьютером')
+    print('2. играть с человеком')
+    print('3. Настраиваемая игра')
 
     while True:
-        choice = input('Выберите пункт меню ')
-        if choice == '1':
-            player_name=input('Выберите имя игрока ')
-            players = [Player(player_name, is_computer=False), Player("Computer", is_computer=True)]
-            break
-        elif choice == '2':
-            player_name_1 = input('Выберите имя игрока 1')
-            player_name_2 = input('Выберите имя игрока 2')
-            players = [Player(player_name_1, is_computer=False), Player(player_name_2, is_computer=False)]
-            break
-        else:
-            print('Неверный пункт меню')
+        try:
+            choice = input('Выберите пункт меню ')
+            if choice == '1':
+                player_name=input('Выберите имя игрока ')
+                players = [Player(player_name, is_computer=False), Player("Computer", is_computer=True)]
+                break
+            elif choice == '2':
+                player_name_1 = input('Выберите имя игрока 1 ')
+                player_name_2 = input('Выберите имя игрока 2 ')
+                players = [Player(player_name_1, is_computer=False), Player(player_name_2, is_computer=False)]
+                break
+            elif choice=='3':
+                count_player = int(input('Введите количество игроков '))
+                players =[]
+                for i in range(count_player):
+                    players_name=input(f'Выберите имя игрока {i+1} ')
+                    is_computer= input("Это компьютер? (y/n) ")=="y"
+                    players.append(Player(players_name,is_computer))
+                break
+            else:
+                print('Неверный пункт меню')
+        except  Exception:
+            print("Неверный ввод")
+
 
     list_value = [i for i in range(1, 91)]
     while True:
