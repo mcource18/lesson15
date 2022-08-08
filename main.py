@@ -1,12 +1,9 @@
 import  random
 from class_loto import Card,Player
 
-
-
-
-
-
-
+card1 = Card("Alex")
+card2 = Card("Alex")
+print(card1==card2)
 def play():
     print('1. играть с компьютером')
     print('2. играть с человеком')

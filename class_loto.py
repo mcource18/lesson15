@@ -8,9 +8,10 @@ class Card:
         self.cross_count = 0
         self.name = name
 
-    def show(self):
+
+    def __str__(self):
         mult = int((20 - len(self.name)) / 2)
-        print('-' * mult + self.name + '-' * mult + '-' * (0 if not len(self.name) % 2 else 1))
+        str_card='-' * mult + self.name + '-' * mult + '-' * (0 if not len(self.name) % 2 else 1)
         for i in range(3):
             line = ''
             index = 0
@@ -18,10 +19,11 @@ class Card:
                 if j in self.space[i]:
                     line += " "
                 else:
-                    line += str(self.field[i][index]) + " "
+                    line += f"{self.field[i][index]} "
                     index += 1
-            print(line)
-        print('-' * 20)
+            str_card+=f"\n{line}"
+        str_card+=("\n"+('-' * 20))
+        return str_card
 
     def cross(self, number):
         result = False
@@ -32,6 +34,9 @@ class Card:
                     self.cross_count += 1
                     result = True
         return result
+
+    def __eq__(self, other):
+        return self.field==other.field and self.name==other.name
 
 
 class Player:
@@ -49,7 +54,14 @@ class Player:
         return self.__card.cross(int(num)) or self.__is_computer
 
     def show_card(self):
-        self.__card.show()
+        print(self.__card)
 
     def is_all_cross(self):
         return self.__card.cross_count == 15
+
+    def __str__(self):
+        return str({'name':self.name,'is_computer':self.__is_computer})
+
+    def __eq__(self, other):
+        return self.name==other.name and self.is_computer==other.is_computer
+
